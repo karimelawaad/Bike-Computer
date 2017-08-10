@@ -2,8 +2,15 @@
 #include <IRremoteInt.h>
 #include <U8glib.h>
 #include <stdlib.h>
+<<<<<<< 24421c16034d77a71ea5f58d523eae3c8960ad3c
 
 #define RECV_PIN 2
+=======
+#include <LowPower.h>
+
+#define RECV_PIN 2
+#define WAKE_UP_PIN 3
+>>>>>>> added stand-by power saving mode
 #define WHEEL_RADIUS 0.29f
 #define NUMBER_OF_MAGNETS 1
 
@@ -29,7 +36,14 @@ void setup() {
   currentCyclesCount = 0;
   cyclesCount = 0;
   currentSpeed = 0;
+<<<<<<< 24421c16034d77a71ea5f58d523eae3c8960ad3c
 
+=======
+  
+  pinMode(WAKE_UP_PIN, INPUT);
+  attachInterrupt(1, wakeUp, LOW);
+  
+>>>>>>> added stand-by power saving mode
   analogWrite(BACKLIGHT_PIN, 255);
   
   Serial.begin(9600);
@@ -62,6 +76,18 @@ void loop() {
     lastUpdateTime = millis();
     irrecv.resume();
   }
+<<<<<<< 24421c16034d77a71ea5f58d523eae3c8960ad3c
+=======
+
+  if(millis() - lastUpdateTime > 5 * 1000 * 60){
+    LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+  }
+}
+
+void wakeUp()
+{
+  
+>>>>>>> added stand-by power saving mode
 }
 
 void updateDisplay()
@@ -83,4 +109,8 @@ void updateDisplay()
   //disp.setPrintPos(15, 15);  // set position
   }while(disp.nextPage());
 }
+<<<<<<< 24421c16034d77a71ea5f58d523eae3c8960ad3c
 
+=======
+
+>>>>>>> added stand-by power saving mode
